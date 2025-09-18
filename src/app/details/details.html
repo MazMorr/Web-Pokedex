@@ -1,0 +1,87 @@
+@if (pokeResource.isLoading()) {
+    <p>Loading...</p>
+} @else if (pokeResource.error()) {
+    <p>Error loading Pokemon</p>
+} @else { @if (pokeResource.value(); as pokemon) {
+<div class="poke-details">
+  @if (pokemon.sprites.front_default) {
+    <img width="200" height="200" [src]="pokemon.sprites.front_default" [alt]="name()" />
+  } @else {
+    <!-- Imagen por defecto o placeholder -->
+    <div class="image-placeholder">No image available</div>
+  }
+
+  <h1 class="title">{{ name() | uppercase }}</h1>
+
+  <div>
+    @for (type of pokemon.types; track type) {
+        @switch (type.type.name) {
+            @case ("normal") {
+                <span class="type-badge" id="normal">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("fire") {
+                <span class="type-badge" id="fire">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("water") {
+                <span class="type-badge" id="water">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("electric") {
+                <span class="type-badge" id="electric">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("grass") {
+                <span class="type-badge" id="grass">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("ice") {
+                <span class="type-badge" id="ice">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("fighting") {
+                <span class="type-badge" id="fighting">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("poison") {
+                <span class="type-badge" id="poison">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("ground") {
+                <span class="type-badge" id="ground">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("flying") {
+                <span class="type-badge" id="flying">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("psychic") {
+                <span class="type-badge" id="psychic">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("bug") {
+                <span class="type-badge" id="bug">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("rock") {
+                <span class="type-badge" id="rock">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("ghost") {
+                <span class="type-badge" id="ghost">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("dragon") {
+                <span class="type-badge" id="dragon">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("dark") {
+                <span class="type-badge" id="dark">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("steel") {
+                <span class="type-badge" id="steel">{{ type.type.name | uppercase }}</span>
+            }
+            @case ("fairy") {
+                <span class="type-badge" id="fairy">{{ type.type.name | uppercase }}</span>
+            }
+            @default {
+                <span class="type-badge" id="unknown">{{ type.type.name | uppercase }}</span>
+            }
+        }
+    }
+  </div>
+
+  <h1 class="title">Base Stats</h1>
+  <h3 class="properties">Height: {{ pokemon.height }}</h3>
+  <h3 class="properties">Weight: {{ pokemon.weight }}</h3>
+  <h3 class="properties">Base XP: {{pokemon.base_experience}}</h3>
+
+  <a class="back-link" [routerLink]="'/'">Back to Pokemon List</a>
+</div>
+} }

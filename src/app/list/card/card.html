@@ -1,0 +1,9 @@
+<a class="poke-card"  [routerLink]="pokeResult().name">
+  <img
+    width="120"
+    height="120"
+    [ngSrc]="pokeResult().url | pokeImg"
+    [alt]="pokeResult().name"
+  />
+  <p>{{ pokeResult().name | uppercase}}</p>
+</a>

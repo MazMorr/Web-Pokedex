@@ -1,0 +1,15 @@
+<h1 class="title">My Pokemon List</h1>
+<div class="poke-container">
+  @if(pokeListResource.isLoading()){
+  <p>Loading</p>
+  } @else if (pokeListResource.error()) {
+  <p>Error loading Pokemon</p>
+  } @else {
+  <div class="poke-container">
+    @let pokeList = pokeListResource.value(); 
+    @for (pokeResult of pokeList?.results; track pokeResult) {
+    <app-card [pokeResult]="pokeResult" />
+    }
+  </div>
+  }
+</div>
