@@ -1,15 +1,37 @@
-<h1 class="title">My Pokemon List</h1>
+<h1 class="title">My Pokedex</h1>
+
+<!-- Controles de paginación -->
+<div class="pagination-controls">
+  <button 
+    (click)="prevPage()" 
+    [disabled]="currentPage() === 0"
+    class="page-btn">
+    Previous
+  </button>
+
+  <span class="page-info">
+    {{ currentPage() + 1 }} - {{ totalPages() }}
+  </span>
+
+  <button 
+    (click)="nextPage()" 
+    [disabled]="currentPage() + 1 >= totalPages()"
+    class="page-btn">
+    Next
+  </button>
+</div>
+
 <div class="poke-container">
   @if(pokeListResource.isLoading()){
-  <p>Loading</p>
+    <p>Loading</p>
   } @else if (pokeListResource.error()) {
-  <p>Error loading Pokemon</p>
+    <p>Error loading Pokemon</p>
   } @else {
-  <div class="poke-container">
-    @let pokeList = pokeListResource.value(); 
-    @for (pokeResult of pokeList?.results; track pokeResult) {
-    <app-card [pokeResult]="pokeResult" />
-    }
-  </div>
+    <div class="poke-container">
+      @let pokeList = pokeListResource.value(); 
+      @for (pokeResult of pokeList?.results; track pokeResult) {
+        <app-card [pokeResult]="pokeResult" />
+      }
+    </div>
   }
 </div>

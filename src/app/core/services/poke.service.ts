@@ -9,8 +9,12 @@ import { Pokemon } from '../models/pokemon.model';
 export class PokeService {
   readonly #pokeUrl = 'https://pokeapi.co/api/v2';
 
-  getPokeList(): HttpResourceRef<PokeList | undefined> {
-    return httpResource<PokeList>(() => `${this.#pokeUrl}/pokemon?limit=151`);
+  getPokeList(offset: Signal<number>, limit: Signal<number>): HttpResourceRef<PokeList | undefined> {
+    return httpResource<PokeList>(() => {
+      const offsetValue = offset();
+      const limitValue = limit();
+      return `${this.#pokeUrl}/pokemon?offset=${offsetValue}&limit=${limitValue}`;
+    });
   }
 
   getPokemon(name: Signal<string>): HttpResourceRef<Pokemon | undefined> {
